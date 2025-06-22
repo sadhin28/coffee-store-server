@@ -15,9 +15,6 @@ app.get('/',(req,res)=>{
 //K5rN0bAvrbCvWlY5
 //coffeeMaster
 
-
-
-// const uri = "mongodb+srv://coffeeMaster:K5rN0bAvrbCvWlY5@user-management-system.h2w7at6.mongodb.net/?retryWrites=true&w=majority&appName=user-management-system";
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@user-management-system.h2w7at6.mongodb.net/?retryWrites=true&w=majority&appName=user-management-system`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
