@@ -37,12 +37,19 @@ async function run() {
             const result = await cursor.toArray();
             res.send(result)
         })
-        //Update Operation
+        //get  coffee by id  for update operation Operation
         app.get('/coffee/:id',async(req,res)=>{
             const id = req.params.id;
             const query={_id: new ObjectId(id)}
             const result = await coffeecollection.findOne(query)
             res.send(result)
+        })
+
+        // Update Coffee by id
+        app.put('/coffee/:id',async(req,res)=>{
+            const id= req.params.id;
+            const filter = {_id : new ObjectId(id)}
+            const options = {upsert:true};
         })
        
         app.post('/coffee', async (req, res) => {
