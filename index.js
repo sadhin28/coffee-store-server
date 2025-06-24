@@ -32,40 +32,45 @@ async function run() {
         await client.connect();
         const coffeecollection = client.db('CoffeeDB').collection('coffee')
 
-        app.get('/coffee',async(req,res)=>{
-            const cursor = coffeecollection.find();
-            const result = await cursor.toArray();
-            res.send(result)
-        })
-        //get  coffee by id  for update operation Operation
-        app.get('/coffee/:id',async(req,res)=>{
+      
+        //get  coffee by id  for update operation 
+        app.get('/coffee/:id', async (req, res) => {
             const id = req.params.id;
-            const query={_id: new ObjectId(id)}
+            const query = { _id: new ObjectId(id) }
             const result = await coffeecollection.findOne(query)
             res.send(result)
         })
 
         // Update Coffee by id
-        app.put('/coffee/:id',async(req,res)=>{
-            const id= req.params.id;
-            const filter = {_id : new ObjectId(id)}
-            const options = {upsert:true};
-            const updatedCoffee= req.body;
+        app.put('/coffee/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: new ObjectId(id) }
+            const options = { upsert: true };
+            const updatedCoffee = req.body;
             const coffee = {
-                $set:{
-                    category:updatedCoffee.category,
-                    chef:updatedCoffee.chef,
-                    details:updatedCoffee.details,
-                    name:updatedCoffee.naem,
-                    photo:updatedCoffee.photo,
-                    supplier:updatedCoffee.supplier,
-                    taste:updatedCoffee.taste
+                $set: {
+                    category: updatedCoffee.category,
+                    chef: updatedCoffee.chef,
+                    details: updatedCoffee.details,
+                    name: updatedCoffee.name,
+                    photo: updatedCoffee.photo,
+                    supplier: updatedCoffee.supplier,
+                    taste: updatedCoffee.taste
                 }
             }
-            const result = await coffeecollection.updateOne(filter,coffee,options);
+            const result = await coffeecollection.updateOne(filter, coffee, options);
             res.send(result);
         })
-       
+        //=============end update coffee===========
+        
+        //==============Get all coffee=============
+          app.get('/coffee', async (req, res) => {
+            const cursor = coffeecollection.find();
+            const result = await cursor.toArray();
+            res.send(result)
+        })
+
+        //=============start post or add coffee============
         app.post('/coffee', async (req, res) => {
             const newcoffee = req.body;
             console.log(newcoffee)
@@ -74,11 +79,11 @@ async function run() {
             res.send(result)
         })
 
-        // Delete operation
-        app.delete('/coffee/:id',async(req,res)=>{
-            const id=req.params.id
-            const query ={_id: new ObjectId(id)}
-            const result=await coffeecollection.deleteOne(query)
+        // ==================Delete operation
+        app.delete('/coffee/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: new ObjectId(id) }
+            const result = await coffeecollection.deleteOne(query)
             res.send(result)
         })
 
