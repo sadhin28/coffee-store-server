@@ -12,8 +12,7 @@ app.get('/', (req, res) => {
     res.send('Coffee meaking server is running')
 })
 
-//K5rN0bAvrbCvWlY5
-//coffeeMaster
+
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@user-management-system.h2w7at6.mongodb.net/?retryWrites=true&w=majority&appName=user-management-system`;
 
@@ -101,7 +100,8 @@ run().catch(console.dir);
 
 
 
-app.listen(port, () => {
+app.lis
+ten(port, () => {
     console.log('The coffee Maker Server run at port', port)
 })
 console.log(process.env.DB_PASS)
