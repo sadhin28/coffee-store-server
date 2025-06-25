@@ -100,8 +100,7 @@ run().catch(console.dir);
 
 
 
-app.lis
-ten(port, () => {
+app.listen(port, () => {
     console.log('The coffee Maker Server run at port', port)
 })
 console.log(process.env.DB_PASS)
